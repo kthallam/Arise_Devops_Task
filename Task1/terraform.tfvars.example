@@ -1,5 +1,5 @@
-vpc_id     = "vpc-REPLACE_ME"
-subnet_id  = "subnet-REPLACE_ME" # Default subnet for instances without an override.
+vpc_id     = "vpc-XXXXXXXXX"
+subnet_id  = "subnet-YYYYYYYYYY".
 aws_region = "us-east-1"
 
 instances = {
@@ -50,7 +50,7 @@ instances = {
     protected        = false
   }
   database = {
-    subnet_id        = "subnet-REPLACE_WITH_DATABASE_SUBNET"
+    subnet_id        = "subnet-ZZZZZZZ"
     ami_id           = "ami-XXXXXXXX"
     instance_type    = "m5.xlarge"
     root_volume_type = "io2"
