@@ -1,0 +1,65 @@
+vpc_id     = "vpc-REPLACE_ME"
+subnet_id  = "subnet-REPLACE_ME" # Default subnet for instances without an override.
+aws_region = "us-east-1"
+
+instances = {
+  waf = {
+    ami_id           = "ami-XXXXXXXX"
+    instance_type    = "t2.micro"
+    root_volume_type = "standard"
+    root_volume_size = 10
+    key_name         = "waf_key"
+    public_key       = "waf_public_key"
+    environment      = "dev"
+    owner            = "Arise_Devops_Team"
+    protected        = false
+  }
+  web = {
+    subnet_id        = "subnet-XXXXXXX"
+    ami_id           = "ami-XXXXXXXX"
+    instance_type    = "t3.micro"
+    root_volume_type = "gp2"
+    root_volume_size = 20
+    key_name         = "web_key"
+    public_key       = "web_key_public_key
+    environment      = "dev"
+    owner            = "Arise_Devops_Team"
+    protected        = false
+  }
+  app = {
+    ami_id           = "ami-XXXXXXXX"
+    instance_type    = "t3.small"
+    root_volume_type = "gp3"
+    root_volume_size = 30
+    key_name         = "app_key"
+    public_key       = "app_public_key"
+    environment      = "dev"
+    owner            = "Arise_Devops_Team"
+    protected        = false
+  }
+  batch_job = {
+    ami_id           = "ami-XXXXXXXX"
+    instance_type    = "m5.large"
+    root_volume_type = "io1"
+    root_volume_size = 40
+    root_volume_iops = 1000
+    key_name         = "batch_job_key"
+    public_key       = "batch_job_public_key"
+    environment      = "dev"
+    owner            = "Arise_Devops_Team"
+    protected        = false
+  }
+  database = {
+    subnet_id        = "subnet-REPLACE_WITH_DATABASE_SUBNET"
+    ami_id           = "ami-XXXXXXXX"
+    instance_type    = "m5.xlarge"
+    root_volume_type = "io2"
+    root_volume_size = 50
+    root_volume_iops = 1000
+    key_name         = "database_key"
+    public_key       = "database_public_key"
+    environment      = "dev"
+    owner            = "Arise_Devops_Team"
+    protected        = true
+  }
+}
