@@ -122,34 +122,3 @@ output "roleC_arn" {
   value = aws_iam_role.roleC.arn
 }
 ```
-
-
-## Setup and verification
-
-Replace the dummy account IDs and configure deployment profiles `account-a`
-and `account-b` for their respective accounts. roleB must already exist.
-If roleC already exists, import it instead of attempting to create a duplicate.
-Run `terraform init`, `terraform validate`, and `terraform plan` from `task5/`.
-This directory uses its own local state; it does not inherit the EC2 backend.
-
-After applying, use active roleB session credentials to test the trust:
-
-```sh
-aws sts get-caller-identity
-aws sts assume-role --role-arn arn:aws:iam::111111111111:role/roleC --role-session-name task5-check
-```
-
-Replace the Account B ID. The first command should identify a roleB session.
-The second returns temporary roleC credentials; use those credentials for
-subsequent calls as roleC. It does not automatically switch the current CLI session.
-
-The two allow policies do not override applicable explicit denies or restrictions
-from permissions boundaries, session policies, or organization policies.
-If roleB is deleted and recreated, refresh roleC's trust policy: IAM stores the
-trusted role's unique principal ID, which changes even if its ARN is reused.
-
-References: [AWS cross-account access](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies-cross-account-resource-access.html),
-[AWS Principal documentation](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html).
-
-The standalone Terraform configuration passed `terraform validate`. Live
-cross-account assumption has not been tested against AWS.
